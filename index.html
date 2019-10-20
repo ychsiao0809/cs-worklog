@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>本月時數統計表</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <div id="app" class="container mt-2" v-cloak>
+    <h1 class="mt-3">本月時數統計表</h1>
+    <div class="row mb-4">
+      <ul class="nav nav-pills flex-column flex-sm-row">
+        <li class="nav-item m-2" v-for="(group, groupName) in worklogs">
+          <a
+            href="#"
+            class="flex-sm-fill text-sm-center nav-link"
+            :class="{ active: activeGroup === groupName }"
+            @click="activeGroup = groupName">
+            {{ groupName.toUpperCase() }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">CSID</th>
+            <th scope="col">JOBS</th>
+            <th scope="col">USR</th>
+            <th scope="col">ADM</th>
+            <th scope="col">CHK</th>
+            <th scope="col">MEETINGS</th>
+            <th scope="col">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(ta, csid) in activeTAs">
+            <td>
+              <a
+                :href="`./personal.html?csid=${csid}`"
+                class="card-link"
+                title="詳細資料">
+                {{ csid.toUpperCase() }}
+              </a>
+            </td>
+            <td>{{ calcWorkTime(ta)['list']['jobs'].toFixed(2) }}</td>
+            <td>{{ calcWorkTime(ta)['list']['usr'].toFixed(2) }}</td>
+            <td>{{ calcWorkTime(ta)['list']['adm'].toFixed(2) }}</td>
+            <td>{{ calcWorkTime(ta)['list']['chk'].toFixed(2) }}</td>
+            <td>{{ calcWorkTime(ta)['list']['meetings'].toFixed(2) }}</td>
+            <td>{{ calcWorkTime(ta)['total'].toFixed(2) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

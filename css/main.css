@@ -1,0 +1,16 @@
+#app, body, html {
+  font-family: Roboto,黑體-繁,微軟正黑體,sans-serif;
+}
+
+#app[v-cloak] {
+  display: none;
+}
+
+body {
+  background: #f8f9fa;
+}
+
+.nav.nav-pills {
+  border-radius: 0.5rem;
+  background: #e9ecef;
+}
